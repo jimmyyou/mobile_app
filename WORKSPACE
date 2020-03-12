@@ -102,10 +102,10 @@ maven_install(
 # Other dependencies.
 new_git_repository(
     name = "org_mlperf_inference",
+    branch = "dev-rnn",
     build_file = "@//third_party:loadgen.BUILD",
-    commit = "876c6e2e390b188d69675a59a71360ab39007bde",
     patch_cmds = ["python loadgen/version_generator.py loadgen/version_generated.cc loadgen"],
-    remote = "https://github.com/mlperf/inference",
+    remote = "https://github.com/jimmyyou/inference",
 )
 
 http_archive(
