@@ -66,6 +66,7 @@ public final class RunMLPerfWorker implements Handler.Callback {
       return false;
     }
     // Runs the model.
+    String mode = "SubmissionRun";
     TaskConfig taskConfig = mlperfTasks.getTask(data.taskIdx);
     ModelConfig modelConfig = taskConfig.getModel(data.modelIdx);
     DatasetConfig dataset = taskConfig.getDataset();
@@ -80,7 +81,8 @@ public final class RunMLPerfWorker implements Handler.Callback {
       builder.useTfliteBackend(
           MLPerfTasks.getLocalPath(modelConfig.getSrc()), data.numThreads, data.delegate);
       if (useDummyDataSet) {
-        builder.useDummy();
+        builder.useDummy(dataset.getType());
+        mode = "PerformanceOnly";
       } else {
         switch (dataset.getType()) {
           case IMAGENET:
@@ -104,10 +106,7 @@ public final class RunMLPerfWorker implements Handler.Callback {
       }
       MLPerfDriverWrapper driverWrapper = builder.build();
       driverWrapper.runMLPerf(
-          "SubmissionRun",
-          taskConfig.getMinQueryCount(),
-          taskConfig.getMinDurationMs(),
-          data.outputFolder);
+          mode, taskConfig.getMinQueryCount(), taskConfig.getMinDurationMs(), data.outputFolder);
       replyWithUpdateMessage(messenger, "Finished running \"" + modelName + "\".", REPLY_UPDATE);
       replyWithCompleteMessage(
           messenger, modelName, runtime, driverWrapper.getLatency(), driverWrapper.getAccuracy());
