@@ -43,6 +43,10 @@ inline TfLiteType DataType2TfType(DataType::Type type) {
       return kTfLiteInt8;
     case DataType::Float16:
       return kTfLiteFloat16;
+    case DataType::Int32:
+      return kTfLiteInt32;
+    case DataType::Int64:
+      return kTfLiteInt64;
   }
 }
 

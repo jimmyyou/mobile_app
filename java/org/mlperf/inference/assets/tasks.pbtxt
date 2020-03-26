@@ -78,3 +78,19 @@ task {
   min_query_count: 100
   min_duration_ms: 1000
 }
+
+task {
+  name: "Machine Translation"
+  dataset {
+    name: "NMT"
+    type: WMNT
+    path: "/sdcard/mlperf_datasets/mt/img/"
+  }
+  model {
+    name: "smartreply-v1"
+    src: "https://github.com/sunsean21/my_inference/raw/master/nmt_05_12_19_test_beng.tflite"
+    tags: "float32"
+  }
+  min_query_count: 100
+  min_duration_ms: 1000
+}
