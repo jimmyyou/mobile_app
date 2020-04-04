@@ -45,7 +45,7 @@ inline DataType::Type TfType2DataType(TfLiteType type) {
     case kTfLiteInt64:
       return DataType::Int64;
     default:
-      LOG(FATAL) << "TfLiteType " << type << " not supported";
+      // LOG(FATAL) << "TfLiteType " << type << " not supported";
       return DataType::Float32;
   }
 }
@@ -140,7 +140,8 @@ std::vector<void*> TfliteBackend::GetPredictedOutputs() {
         outputs.push_back(output_tensor->data.i64);
         break;
       default:
-        LOG(FATAL) << "Data type not yet supported";
+        // LOG(FATAL) << "Data type not yet supported";
+        outputs.push_back(output_tensor->data.f);
         break;
     }
   }
