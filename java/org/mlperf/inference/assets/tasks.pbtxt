@@ -1,4 +1,74 @@
 task {
+  name: "Speech Recognition"
+  dataset {
+    name: "123"
+    type: ADE20K
+    path: "/sdcard/mlperf_datasets/ADE20K/"
+  }
+  model {
+    name: "deepspeech-1"
+    src: "https://github.com/sunsean21/my_inference/raw/master/deepspeech061.tflite"
+    offset: 1
+    tags: "float32"
+  }
+  min_query_count: 100
+  min_duration_ms: 1000
+}
+
+task {
+  name: "Machine Translation"
+  dataset {
+    name: "345"
+    type: ADE20K
+    path: "/sdcard/mlperf_datasets/ADE20K/img"
+  }
+  model {
+    name: "GNMT-2"
+    src: "https://github.com/sunsean21/my_inference/raw/master/nmt_05_12_19_test_beng_2.tflite"
+    offset: 1
+    tags: "int8"
+  }
+  min_query_count: 100
+  min_duration_ms: 1000
+}
+
+
+task {
+  name: " Language Understanding"
+  dataset {
+    name: "Dummy"
+    type: MOBILEBERT
+    path: "/sdcard/mlperf_datasets/mobilebert/"
+  }
+  model {
+    name: "MobileBert F32"
+    src: "https://github.com/mlperf/mobile_app/raw/model_repo_v0.7/tflite/mobilebert_float_20191023.tflite"
+    tags: "float32"
+  }
+  min_query_count: 100
+  min_duration_ms: 1000
+}
+
+task {
+  name: "Image Segmentation"
+  dataset {
+    name: "ADE20k"
+    type: ADE20K
+    path: "/sdcard/mlperf_datasets/ade20k/"
+  }
+
+  model {
+    name: "Deeplab-v3 Mobilenet-v2 F32"
+    src: "https://github.com/mlperf/mobile_app/raw/model_repo_v0.7/tflite/deeplabv3_mnv2_ade20k_float.tflite"
+    tags: "float32"
+  }
+  min_query_count: 100
+  min_duration_ms: 1000
+}
+
+
+
+task {
   name: "Image classification"
   dataset {
     name: "Imagenet 2012"
@@ -46,35 +116,3 @@ task {
   min_duration_ms: 1000
 }
 
-task {
-  name: " Language Understanding"
-  dataset {
-    name: "Dummy"
-    type: MOBILEBERT
-    path: "/sdcard/mlperf_datasets/mobilebert/"
-  }
-  model {
-    name: "MobileBert F32"
-    src: "https://github.com/mlperf/mobile_app/raw/model_repo_v0.7/tflite/mobilebert_float_20191023.tflite"
-    tags: "float32"
-  }
-  min_query_count: 100
-  min_duration_ms: 1000
-}
-
-task {
-  name: "Image Segmentation"
-  dataset {
-    name: "ADE20k"
-    type: ADE20K
-    path: "/sdcard/mlperf_datasets/ade20k/"
-  }
-
-  model {
-    name: "Deeplab-v3 Mobilenet-v2 F32"
-    src: "https://github.com/mlperf/mobile_app/raw/model_repo_v0.7/tflite/deeplabv3_mnv2_ade20k_float.tflite"
-    tags: "float32"
-  }
-  min_query_count: 100
-  min_duration_ms: 1000
-}
